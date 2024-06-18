@@ -1,0 +1,20 @@
+spring:
+  h2:
+    console:
+      enabled: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    generate-ddl: true
+  application.name: spring-data-polymorphic-example
+  datasource:
+    url: jdbc:h2:mem:polymorphic_example
+    username: sa
+    password: admin
+server:
+  port: 6969
+
+logging.level:
+  org.hibernate.type: trace
+  io.ibnuja: trace
