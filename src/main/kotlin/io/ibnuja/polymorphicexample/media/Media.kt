@@ -1,4 +1,4 @@
-package io.ibnuja.polymorphicexample.status
+package io.ibnuja.polymorphicexample.media
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class Status(
+class Media(
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	val id: Long = 0,
