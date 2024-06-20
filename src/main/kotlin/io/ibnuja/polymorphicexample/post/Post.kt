@@ -1,5 +1,6 @@
 package io.ibnuja.polymorphicexample.post
 
+import io.ibnuja.polymorphicexample.embedded.AuditMetadata
 import jakarta.persistence.*
 
 @Entity
@@ -11,5 +12,8 @@ class Post(
 	@Column(nullable = false)
 	val title: String,
 
-	val body: String
+	val body: String,
+
+	@Embedded
+	val auditingMetadata: AuditMetadata? = null
 )

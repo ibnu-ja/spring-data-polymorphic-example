@@ -1,6 +1,8 @@
 package io.ibnuja.polymorphicexample.product
 
+import io.ibnuja.polymorphicexample.embedded.AuditMetadata
 import jakarta.persistence.Column
+import jakarta.persistence.Embedded
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
@@ -13,5 +15,8 @@ class Product(
 	val id: Long = 0,
 
 	@Column(nullable = false)
-	val name: String
+	val name: String,
+
+	@Embedded
+	val auditingMetadata: AuditMetadata? = null
 )

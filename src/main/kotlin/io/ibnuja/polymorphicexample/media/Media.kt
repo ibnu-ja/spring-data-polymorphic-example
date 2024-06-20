@@ -1,9 +1,7 @@
 package io.ibnuja.polymorphicexample.media
 
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
+import io.ibnuja.polymorphicexample.embedded.AuditMetadata
+import jakarta.persistence.*
 
 @Entity
 class Media(
@@ -11,5 +9,8 @@ class Media(
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	val id: Long = 0,
 
-	val name: String
+	val name: String,
+
+	@Embedded
+	val auditingMetadata: AuditMetadata? = null
 )
