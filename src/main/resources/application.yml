@@ -9,7 +9,7 @@ spring:
     generate-ddl: true
   application.name: spring-data-polymorphic-example
   datasource:
-    url: jdbc:h2:mem:polymorphic_example
+    url: jdbc:h2:./db/polymorphic_example;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;AUTO_SERVER=TRUE
     username: sa
     password: admin
 server:
