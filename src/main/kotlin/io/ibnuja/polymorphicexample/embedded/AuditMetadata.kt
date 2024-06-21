@@ -6,8 +6,8 @@ import java.time.Instant
 
 class AuditMetadata {
 	@CreatedDate
-	private val createdAt: Instant? = null
+	private val createdAt: Instant = Instant.now()
 
 	@LastModifiedDate
-	private val modifiedAt: Instant? = null
+	private var modifiedAt: Instant? = Instant.now()
 }
