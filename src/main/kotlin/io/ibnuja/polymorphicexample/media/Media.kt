@@ -4,10 +4,8 @@ import io.ibnuja.polymorphicexample.embedded.AuditMetadata
 import io.ibnuja.polymorphicexample.post.Post
 import io.ibnuja.polymorphicexample.product.Product
 import jakarta.persistence.*
-import org.hibernate.annotations.AnyDiscriminatorValue
-import org.hibernate.annotations.AnyDiscriminatorValues
-import org.hibernate.annotations.AnyKeyJavaClass
-import org.hibernate.annotations.ManyToAny
+import org.hibernate.annotations.*
+import org.hibernate.annotations.CascadeType
 
 @Entity
 class Media(
@@ -19,25 +17,20 @@ class Media(
 
 	@Embedded
 	var auditingMetadata: AuditMetadata = AuditMetadata(),
+
 	@ManyToAny
-	@Column(name = "model_type")
 	@AnyKeyJavaClass(Long::class)
+	@AnyDiscriminator(DiscriminatorType.STRING)
+	@Column(name = "model_type")
 	@AnyDiscriminatorValues(
-		AnyDiscriminatorValue(
-			discriminator = "post", entity = Post::class
-		),
-		AnyDiscriminatorValue(
-			discriminator = "product", entity = Product::class
-		)
+		AnyDiscriminatorValue(discriminator = "post", entity = Post::class),
+		AnyDiscriminatorValue(discriminator = "product", entity = Product::class),
 	)
+	@Cascade(CascadeType.ALL)
 	@JoinTable(
 		name = "model_has_media",
 		joinColumns = [JoinColumn(name = "media_id")],
-		inverseJoinColumns = [JoinColumn(name = "attachable_id")]
+		inverseJoinColumns = [JoinColumn(name = "model_id")]
 	)
-	val model: MutableList<Mediable> = mutableListOf() // Specify the type explicitly
-) {
-	init {
-		model.forEach { it.addMedia(this) }
-	}
-}
+	var models: MutableList<Mediable> = mutableListOf()
+)
